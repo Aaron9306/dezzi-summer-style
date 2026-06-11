@@ -9,8 +9,7 @@ const searchSchema = z.object({ q: z.string().optional().default("") });
 const searchQuery = (q: string) =>
   queryOptions({
     queryKey: ["products", "search", q],
-    queryFn: () => listProducts({ data: { search: q } }),
-    enabled: q.length > 0,
+    queryFn: () => (q ? listProducts({ data: { search: q } }) : Promise.resolve([])),
   });
 
 export const Route = createFileRoute("/search")({
@@ -35,11 +34,7 @@ export const Route = createFileRoute("/search")({
 function SearchPage() {
   const { q } = Route.useSearch();
   const term = q ?? "";
-  const { data } = useSuspenseQuery({
-    ...searchQuery(term),
-    enabled: true,
-    queryFn: () => (term ? listProducts({ data: { search: term } }) : Promise.resolve([])),
-  });
+  const { data } = useSuspenseQuery(searchQuery(term));
   return (
     <main className="dz-main">
       <Link to="/" className="dz-back">← Home</Link>
