@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dezzi-summer-style",
+  "compatibility_date": "2026-06-11",
+  "observability": {
+    "enabled": true
+  },
+  "main": ".output/server/index.mjs", 
+  "assets": {
+    "directory": ".output/public",
+    "binding": "ASSETS"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
