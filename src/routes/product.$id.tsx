@@ -11,7 +11,7 @@ const productQuery = (id: string) =>
 
 export const Route = createFileRoute("/product/$id")({
   head: ({ loaderData }) => {
-    const p = loaderData?.product;
+    const p = (loaderData as { product?: { name: string; description: string; image_url: string } } | undefined)?.product;
     const title = p ? `${p.name} — Dezzi` : "Product — Dezzi";
     return {
       meta: [
