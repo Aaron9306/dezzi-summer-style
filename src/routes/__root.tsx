@@ -222,16 +222,10 @@ function SiteFooter() {
           <Link to="/category/$slug" params={{ slug: "kids" }}>Kids</Link>
         </div>
         <div>
-          <h4>Help</h4>
-          <a href="#">Shipping</a>
-          <a href="#">Returns</a>
-          <a href="#">Size guide</a>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Careers</a>
+          <h4>Contact</h4>
+          <a href="mailto:johndoe@dezzi.com">johndoe@dezzi.com</a>
+          <a href="tel:+15551234567">+1 (555) 123-4567</a>
+          <a href="tel:+15559876543">+1 (555) 987-6543</a>
         </div>
       </div>
       <div className="dz-footer-bottom">© {new Date().getFullYear()} Dezzi. All prices in USD.</div>
