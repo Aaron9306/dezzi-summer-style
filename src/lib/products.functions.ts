@@ -42,8 +42,17 @@ export const listProducts = createServerFn({ method: "GET" })
     if (data.category) q = q.eq("category", data.category);
     if (data.featuredOnly) q = q.eq("featured", true);
     if (data.search && data.search.trim()) {
-      const term = `%${data.search.trim()}%`;
-      q = q.or(`name.ilike.${term},description.ilike.${term}`);
+      // Split into words; escape PostgREST .or() reserved chars (, ( ) and %)
+      const words = data.search
+        .trim()
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((w) => w.replace(/[%,()*]/g, ""));
+      for (const w of words) {
+        const t = `%${w}%`;
+        q = q.or(`name.ilike.${t},description.ilike.${t},category.ilike.${t}`);
+      }
     }
     const { data: rows, error } = await q;
     if (error) throw new Error(error.message);
