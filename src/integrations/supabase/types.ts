@@ -14,7 +14,92 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      product_reviews: {
+        Row: {
+          author: string
+          body: string
+          created_at: string
+          id: string
+          product_id: string
+          rating: number
+          title: string
+        }
+        Insert: {
+          author: string
+          body: string
+          created_at?: string
+          id?: string
+          product_id: string
+          rating: number
+          title: string
+        }
+        Update: {
+          author?: string
+          body?: string
+          created_at?: string
+          id?: string
+          product_id?: string
+          rating?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_reviews_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          amazon_url: string
+          category: string
+          created_at: string
+          description: string
+          featured: boolean
+          id: string
+          image_url: string
+          name: string
+          original_price: number | null
+          price: number
+          rating: number
+          review_count: number
+          sizes: string[]
+        }
+        Insert: {
+          amazon_url: string
+          category: string
+          created_at?: string
+          description: string
+          featured?: boolean
+          id?: string
+          image_url: string
+          name: string
+          original_price?: number | null
+          price: number
+          rating?: number
+          review_count?: number
+          sizes?: string[]
+        }
+        Update: {
+          amazon_url?: string
+          category?: string
+          created_at?: string
+          description?: string
+          featured?: boolean
+          id?: string
+          image_url?: string
+          name?: string
+          original_price?: number | null
+          price?: number
+          rating?: number
+          review_count?: number
+          sizes?: string[]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
